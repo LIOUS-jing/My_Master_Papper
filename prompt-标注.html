@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>社交媒体空间体验编码指南</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #000;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 30px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .codebook {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .note {
+            background-color: #f9f9f9;
+            border-left: 4px solid #5cb85c;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .instructions {
+            background-color: #f9f9f9;
+            border-left: 4px solid #337ab7;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .example {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .cot {
+            background-color: #f9f9f9;
+            border-left: 4px solid #f0ad4e;
+            padding: 10px 15px;
+            margin: 10px 0;
+        }
+        .json {
+            background-color: #f5f5f5;
+            border-left: 4px solid #5bc0de;
+            padding: 10px 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>社交媒体空间体验与情感行为编码指南</h1>
+    
+    <p>您是一位精通计算社会科学和地理信息科学的数据标注专家，任务是根据预定义的Codebook V1.0，从社交媒体帖子中提取与空间体验、情感表达和行为活动相关的结构化信息。</p>
+    
+    <h2>Codebook V1.0</h2>
+    <div class="codebook">
+        <h3>A_空间环境特征</h3>
+        <h3>B_认知与体验评价</h3>
+        <h3>C_情感表达</h3>
+        <h3>D_活动与行为</h3>
+        <h3>E_RE关系抽取</h3>
+        <h3>G_空间情感行为信息摘要</h3>
+    </div>
+    
+    <h2>注意事项</h2>
+    <div class="note">
+        <ul>
+            <li>对于无法提取的信息或您判断为不适用信息，请直接使用 <code>null</code> 或 "无法判断"，不能强行假定。</li>
+            <li>活动、情感等允许多个值的字段，请使用列表 <code>[]</code>。</li>
+        </ul>
+    </div>
+    
+    <h2>指令</h2>
+    <div class="instructions">
+        <ol>
+            <li><strong>思维链 (Chain-of-Thought)</strong>：首先，请逐步分析帖子内容，识别出与Codebook V1.0各维度相关的关键信息点，并简要说明您的判断依据。</li>
+            <li><strong>JSON输出</strong>：然后，根据您的分析，严格按照上述Codebook V1.0的JSON结构，生成最终的编码结果。</li>
+        </ol>
+    </div>
+    
+    <h2>示例</h2>
+    
+    <h3>示例1</h3>
+    <div class="example">
+        <p><strong>原文数据</strong>：今天和朋友去了下关火车主题公园，人不算多。沿着江边走了好久，风吹着超舒服！看到了绿皮火车和旧铁轨，满满的怀旧感涌上来，仿佛回到了过去。拍了很多有氛围感的照片！夕阳下的长江太美了，感觉很治愈，下次天气好还要再来！</p>
+        
+        <div class="cot">
+            <p><strong>思维链</strong>：</p>
+            <ul>
+                <li><code>A_空间环境特征</code>：A1_自然要素：提到"江边"、"长江"、"夕阳"等自然景观；A2_人工构筑物：提到"火车主题公园"、"绿皮火车"、"旧铁轨"等人造设施</li>
+                <li><code>B_认知与体验评价</code>：B2_空间氛围/美学评价："有氛围感"、"太美了"表明对景观有美学评价；B4_记忆与联想："仿佛回到了过去"表明空间唤起了历史记忆；B5_具身感知评价："风吹着超舒服"描述了身体感受</li>
+                <li><code>C_情感表达</code>：C1_积极情感："舒服"、"治愈"等表达了积极情感；C3_情感强度："超舒服"、"太美了"、"满满的"等词表示情感强度较高；C5_场所依恋相关情感："怀旧感"表达了对场所的情感联结</li>
+                <li><code>D_活动与行为</code>：D1_个体休闲活动："沿着江边走"、"拍照"属于个体休闲活动；D2_社交互动活动："和朋友去"表明有社交互动；D4_行为倾向："下次天气好还要再来"表明有重访意愿</li>
+                <li><code>E_RE关系抽取</code>：E1_空间环境特征导致认知评价："绿皮火车和旧铁轨" -> "有氛围感"；E2_认知引发情感："回到了过去"的历史记忆联想 -> "怀旧感"；E3_情感驱动行为："治愈"的积极情感 -> "下次还要再来"的重访意愿</li>
+            </ul>
+        </div>
+        
+        <div class="json">
+            <p><strong>JSON输出</strong>：</p>
+            <pre><code>{
+  "A_空间环境特征": {
+    "A1_自然要素": ["江边", "长江", "夕阳"],
+    "A2_人工构筑物": ["火车主题公园", "绿皮火车", "旧铁轨"]
+  },
+  "B_认知与体验评价": {
+    "B1_空间易读性评价": null,
+    "B2_空间氛围/美学评价": ["有氛围感", "太美了"],
+    "B3_功能性/便利性评价": null,
+    "B4_记忆与联想": ["仿佛回到了过去"],
+    "B5_具身感知评价": ["风吹着超舒服"]
+  },
+  "C_情感表达": {
+    "C1_积极情感": ["舒服", "治愈"],
+    "C2_消极情感": null,
+    "C3_情感强度": "高",
+    "C4_复杂/矛盾情感": null,
+    "C5_场所依恋相关情感": ["怀旧感"]
+  },
+  "D_活动与行为": {
+    "D1_个体休闲活动": ["沿着江边走", "拍照", "看风景"],
+    "D2_社交互动活动": ["和朋友一起游览"],
+    "D3_特定目的活动": null,
+    "D4_行为倾向": ["下次天气好还要再来"]
+  },
+  "E_RE关系抽取": {
+    "E1_空间环境特征导致认知评价": ["绿皮火车和旧铁轨 -> 有氛围感", "夕阳下的长江 -> 太美了"],
+    "E2_认知引发情感": ["回到了过去 -> 怀旧感", "太美了 -> 治愈"],
+    "E3_情感驱动行为": ["治愈 -> 下次还要再来"],
+    "E4_空间实体关系": null
+  },
+  "G_空间情感行为信息摘要": "在下关火车主题公园(空间:历史遗迹/公园)，与朋友沿江边走路拍照(行为)，看到绿皮火车、旧铁轨和夕阳下的长江(空间视觉)，感觉有氛围感、太美了、仿佛回到过去(认知评价)，感到舒服、怀旧、治愈(情感)，想下次天气好还要再来(行为意愿)。"
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html>
