@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>数据标注指南</title>
+    <style>
+        body {
+            font-family: "SimSun", "Songti SC", serif; /* Common Chinese fonts for readability */
+            background-color: white;
+            color: black;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 { 
+            font-size: 2em; 
+            border-bottom: 2px solid black; 
+            padding-bottom: 0.3em; 
+            margin-top: 0.5em;
+            margin-bottom: 1em; 
+            text-align: center; 
+        }
+        h2 { 
+            font-size: 1.5em; 
+            margin-top: 2.5em; 
+            margin-bottom: 1em; 
+            border-top: 1px solid black; /* Separator for major categories */
+            padding-top: 1em; 
+        }
+        h3.field-name { 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            margin-top: 1em; 
+            margin-bottom: 0.5em;
+        }
+        .preface {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px dashed black; /* Dashed separator after preface */
+            text-align: left; /* Align preface text to the left */
+        }
+        .preface p {
+            font-style: normal; /* Regular style for preface, not italic */
+            margin-bottom: 0.2em;
+            font-weight: bold; /* Make preface headers bold */
+        }
+        .field-block {
+            margin-left: 10px; 
+            margin-bottom: 1.5em; 
+            padding-left: 10px;
+            /* border-left: 1px solid #ddd; */ /* Optional subtle left border for field blocks */
+        }
+        pre {
+            background-color: white; /* Ensure pre background is white */
+            color: black; /* Ensure pre text is black */
+            font-family: inherit; /* Use the body's font family */
+            padding: 0; 
+            border: none; 
+            white-space: pre-wrap;  /* Wrap long lines and preserve spaces/newlines */
+            word-wrap: break-word;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            line-height: inherit; 
+        }
+        strong { 
+            font-weight: bold; /* For text marked with ** in the source */
+        }
+    </style>
+</head>
+<body>
+    <h1>数据标注指南</h1>
+    <div class='preface'>
+<p>大类 (Category)</p>
+<p>列名 (字段名)</p>
+<p>说明与标注指南</p>
+<p>示例</p>
+</div>
+<h2>I. 基础信息 (Basic Info)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Text_ID</h3>
+<pre>文本唯一标识符
+xhs_post_12345</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Original_Text</h3>
+<pre>原始文本数据
+"周末和朋友去了下关滨江，在网红灯塔下拍照打卡，江风吹得很舒服，就是人有点多。看到橘子海一样的落日，太治愈了！下次还想来。"</pre>
+</div>
+<h2>II. 空间环境特征 (Spatial)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Place_Name</h3>
+<pre>识别出的具体地点名称 (限定列表，可扩充)。
+编码指南: 优先匹配下方特定列表，如无匹配但能识别，则记录；无法识别则留空。
+下关滨江; 网红灯塔; 长江大桥; 大桥南堡公园; 玻璃栈道; 映红桥; 下关火车主题公园; 铁路轮渡旧址; 民国海军医院旧址; 江豚观赏地; 大马路; 民国首都电厂旧址公园; 中山码头; 浦口火车站; 南京西站; 7-11江边路店; 夕Space落日餐厅</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Place_Type</h3>
+<pre>地点的主要类型或功能 (可多选，用分号;隔开)。
+编码指南: 根据具体空间和要素特征，分为示例中给出的地点或功能类型。
+公园/绿地; 滨水区域; 路径/步道; 广场/开阔地; 地标/空间节点; 历史遗迹; 商业设施; 交通枢纽</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Spatial_Features_Manmade</h3>
+<pre>文本提及的主要<strong>人造</strong>空间构成要素 (可多选，用分号;隔开)。
+编码指南: 提取具体的设施、构筑物、边界、建筑物等。主要包括
+ 
+路径与交通道路 ：滨江步道/跑道/漫步道、自行车道、次级园路/连接道、桥梁/栈道、出入口/通道、无障碍设施
+界面与边界：滨水岸线 (与长江的交界面)、公园边界 (与城市道路/建筑的交界) 、内部区域边界 (如植被带、铺装变化、矮墙) 、高差/台阶、滨水/城市界面
+人工设施与小品：座椅/休憩设施、照明设施 (灯具、夜景灯光)、标识/信息牌、游乐/健身器材、垃圾桶/清洁设施、艺术装置/雕塑 、灯塔、座椅、桥; 栏杆、指示牌; 火车</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Spatial_Features_Natural</h3>
+<pre>文本提及的主要<strong>自然</strong>环境要素 (可多选，用分号;隔开)。
+编码指南:提取水体、植被、天气、动物等。
+长江; 江面; 落日; 天空; 绿植; 草坪; 江豚; 风; 雨</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Spatial_Features_Visual</h3>
+<pre>文本中明确提到的<strong>视觉</strong>空间元素 (用分号;隔开)。
+编码指南: 侧重记录引发感知的具体视觉对象或景观要素。
+橘子海; 灯光; 工业风建筑; 绿皮火车; 开阔江景</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Spatial_Features_OtherSensory</h3>
+<pre>文本中明确提到的与<strong>其他感官</strong>相关的空间特征 (用分号;隔开)。
+编码指南: 记录引发听觉、触觉、嗅觉等感知的具体对象或环境特征。
+火车汽笛声; 江涛声; 湿滑的地面; 风; 花香；气温；天气</pre>
+</div>
+<h2>III. 认知评价与体验 (Cognitive)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Sensory_Visual_Desc</h3>
+<pre>对<strong>视觉</strong>感官体验的直接描述和评价 (非物体本身)。
+编码指南: 记录形容视觉感受的词语。
+色彩斑斓; 视野开阔; 光线柔和; 有点晃眼; 灰蒙蒙</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Sensory_Auditory_Desc</h3>
+<pre>对<strong>听觉</strong>感官体验的直接描述和评价。
+编码指南: 记录形容听觉感受的词语。
+安静; 嘈杂; 很响; 有点吵; 声音很远</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Sensory_TactileKinesthetic_Desc</h3>
+<pre>对<strong>触觉/动觉/体感</strong>体验的直接描述。
+编码指南: 记录形容触感、温度、身体感受的词语。
+舒服; 温暖; 冷; 风大; 拥挤; 跑起来很顺畅; 路面平坦</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Sensory_OlfactoryGustatory_Desc</h3>
+<pre>对<strong>嗅觉/味觉</strong>感官体验的直接描述。
+编码指南: 记录形容气味或味道的词语（若提及）。
+空气清新; 有股怪味; 食物的香味</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Cognitive_Legibility_Orientation</h3>
+<pre>关于空间易读性、方向感的评价。
+编码指南: 评估用户对空间布局清晰度、导航容易度的判断。
+路线清晰; 指示牌明确; 有点绕; 容易迷路; 视野好；清晰/模糊、易于导航/容易迷路、方向感强/无方向感、视野开阔/受阻</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Cognitive_Functionality_Usability</h3>
+<pre>关于空间功能性、易用性的评价。
+编码指南: 评估用户对空间或设施是否满足其需求、使用是否方便、安全舒适的判断。
+方便; 设施齐全; 座椅充足; 不实用; 维护差; 安全; 无障碍；好用/不好用、方便/不便、舒适/不适、安全/危险</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Cognitive_Aesthetics_Quality</h3>
+<pre>关于空间美学、品质的评价。
+编码指南: 评估用户对空间或元素的视觉美感、设计感、维护状况的判断。
+好看; 出片; 有设计感; 精致; 普通; 有点旧; 脏乱；美/丑；精致/粗糙；协调/突兀；新/旧；干净/脏乱；有设计感/普通</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Cognitive_Atmosphere_Experience</h3>
+<pre>关于空间氛围、整体体验感的评价。
+编码指南: 评估用户对空间整体感觉、氛围特征的判断。
+有氛围感;  有活力; 放松; 浪漫; 压抑; 无聊；宁静/喧闹、活力/沉闷、浪漫/普通、放松/紧张、有趣/无聊、独特/一般</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Cognitive_Meaning_Association</h3>
+<pre>关于空间的象征意义、记忆联想的评价。
+编码指南: 评估用户对空间所承载的历史、文化、个人意义或引发联想的判断。
+有历史感; 现代; 文艺; 浪漫; 怀旧; 有故事; 熟悉；有文化底蕴/肤浅；有象征意义/无特殊含义；熟悉/陌生；有回忆/无关联</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Social_CrowdLevel</h3>
+<pre>感知到的人群拥挤程度。
+编码指南: 根据文本描述判断。
+空旷/没人; 人少; 适中; 人多/拥挤</pre>
+</div>
+<h2>V. 情感表达 (Emotional)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Emotion_Valence</h3>
+<pre>整体情感倾向。
+编码指南: 根据文本整体或主要情感判断。
+Positive; Negative; Neutral; Mixed</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Emotion_Discrete</h3>
+<pre>识别出的具体离散情感类别 (可多选，用分号;隔开)。
+编码指南:选择最贴切的情感词。
+愉悦/开心; 放松/平静; 敬畏/惊叹; 兴趣/好奇; 舒适/安全; 怀旧/温馨; 自豪/归属感; 挫败/烦恼; 焦虑/害怕; 悲伤/失望; 无聊/厌烦; 厌恶</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Emotion_Intensity</h3>
+<pre>整体或主要情感的强度。
+编码指南: 可使用三个程度的等级或记录强度词、或统计出现评测。
+强/高; 中/一般; 弱/低; 
+或 强度词：非常; 太; 有点; 极其
+总体上划分为：2积极：强/高，1积极：有点，0中/一般，-1消极：有点，-2消极：高/强</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Emotion_Shift</h3>
+<pre>文本中是否描述了明显的情感转变 (是/否)。
+编码指南: 关注表示状态变化或对比的描述。可补充说明转变方向（如：消极-&gt;积极）。
+是 (焦虑-&gt;放松); 否</pre>
+</div>
+<h2>VI. 行为活动 (Behavioral)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Social_Company</h3>
+<pre>行为的同伴情况。
+编码指南: 根据文本描述判断。
+独自; 与朋友; 与家人; 与伴侣; 与同事; 与陌生人/人群</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Activities</h3>
+<pre>在该空间进行的具体活动 (可多选，用分号;隔开)。
+编码指南: 记录所有提及的具体个体或社交活动，活动后注明是集体/个人/不清楚
+散步; 跑步; 骑行; 拍照; 观景; 打卡; 野餐; 聊天; 约会; 亲子活动; 遛狗; 发呆; 阅读; 看日落; 参加活动(如音乐节)</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Social_Interaction_Desc</h3>
+<pre>对社交互动行为的描述 
+(有（具体描述）/没有)
+编码指南: 记录具体的互动内容或评价。
+"和朋友聊得很开心"; "看到很多家庭带孩子玩"; "和陌生人一起看日落"</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Lingering_Mention</h3>
+<pre>是否提及停留时长或行为倾向的意愿。
+编码指南: 记录描述停留时间长短或停留意愿的表达。
+待了很久; 坐了一下午; 不想走; 匆匆离开; 逛了一圈就走了</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Approach_Avoidance_Intent</h3>
+<pre>表达的行为倾向性：接近/回避意愿。
+编码指南: 记录推荐、重访意愿或劝退、不再来的表达。
+推荐; 下次还来; 想常来; 不会再来了; 劝退; 避雷</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Plan_Change</h3>
+<pre>是否提及因体验而改变了原计划 (是/否)。
+编码指南: 记录是否因环境或体验导致行为计划变动。
+是 (人太多提前走了); 否</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>Behavior_Activity_Evaluation</h3>
+<pre>对所进行的<strong>活动本身</strong>的评价。
+编码指南: <strong>注意</strong>：区分是对空间的评价（归入认知评价）还是对活动体验的评价。
+"跑得很舒服"; "拍照很出片"; "聊天很开心"; "散步很放松"</pre>
+</div>
+<h2>VII. 关系抽取 (Relation)</h2>
+<div class='field-block'>
+<h3 class='field-name'>RE_Spatial_Cognitive</h3>
+<pre>空间特征如何<strong>引发/关联</strong>了哪个<strong>认知评价</strong>。
+<strong>格式</strong>: [空间特征文本片段] -&gt; [认知评价文本片段]
+[网红灯塔] -&gt; [好看/出片]; [滨江步道] -&gt; [路线清晰]</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>RE_Cognitive_Emotion</h3>
+<pre>认知评价如何<strong>引发/关联</strong>了哪个<strong>核心情感</strong>。
+<strong>格式</strong>: [认知评价文本片段] -&gt; [情感类别]
+[好看/出片] -&gt; [愉悦/开心]; [宁静] -&gt; [放松/平静]</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>RE_Emotion_Behavior</h3>
+<pre>情感如何<strong>驱动/关联</strong>了哪个<strong>行为/意图</strong>。
+<strong>格式</strong>: [情感类别] -&gt; [行为/意图文本片段]
+[放松/平静] -&gt; [待了很久/不想走]; [愉悦/开心] -&gt; [推荐/下次还来]</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>RE_Spatial_Emotion</h3>
+<pre>空间特征直接<strong>引发/关联</strong>了哪个<strong>核心情感</strong> (如果文本明确表达，绕过了认知评价)。
+<strong>格式</strong>: [空间特征文本片段] -&gt; [情感类别]
+[橘子海落日] -&gt; [治愈/敬畏]; [江风] -&gt; [舒适]</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>RE_Spatial_Relation</h3>
+<pre>实体间的<strong>空间关系</strong> (如位置、包含等)。
+<strong>格式</strong>: [实体1] [关系类型] [实体2]
+[灯塔] [位于] [江边]; [步道] [沿着] [长江]；从[下关火车主题公园] 沿着「滨江步道」走到了 [轮渡栈桥旧址]</pre>
+</div>
+<div class='field-block'>
+<h3 class='field-name'>RE_Other</h3>
+<pre>其他重要的关系。</pre>
+</div>
+<h2>VIII. 综合摘要 (Summary)</h2>
+<div class='field-block'>
+<h3 class='field-name'>Spatio_Emotional_Cognitive_Behavioral_Summary</h3>
+<pre>人工撰写的一句概括性摘要，整合关键信息。
+<strong>格式</strong>: 在[地点]（[空间特征]），进行[行为活动]，感知到[感官体验]，产生[认知评价]，感受到[情感表达]，并表达了[行为意图]。
+在下关滨江网红灯塔下(地点/人造特征)，和朋友拍照打卡(行为)，感知到江风吹拂(触觉)，认为灯塔好看(认知美学)，感到开心治愈(情感)，并表示下次还想来(行为意图)。</pre>
+</div>
+</body>
+</html> 
